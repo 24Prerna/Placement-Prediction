@@ -2,15 +2,15 @@
 The Placement Navigator project is designed to streamline and enhance the student placement process by leveraging machine learning and data analysis. It aims to predict a student's likelihood of securing placement and recommend suitable companies based on their skills and academic performance.
 
 Objectives  
- •	Predictive Analysis: Develop a robust machine learning model that accurately forecasts a student's placement status based on academic records, chosen stream, and skill set. 
- •	Company Recommendations: Provide students with a curated list of companies that align with their qualifications and skills, enhancing their chances of successful employment. 
+1. Predictive Analysis: Develop a robust machine learning model that accurately forecasts a student's placement status based on academic records, chosen stream, and skill set.
+2. Company Recommendations: Provide students with a curated list of companies that align with their qualifications and skills, enhancing their chances of successful employment. 
 
 Tools and Technology Requirements 
- •	Programming Languages: Python 
- •	Libraries: Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn 
- •	Frameworks: Flask for web development 
- •	Frontend Technologies: HTML, CSS, JavaScript 
- •	IDE: Jupyter Notebook, VS Code 
+ 1. Programming Languages: Python
+ 2. Libraries: Scikit-learn, Pandas, NumPy, Matplotlib, Seaborn
+ 3. Frameworks: Flask for web development
+ 4. Frontend Technologies: HTML, CSS, JavaScript
+ 5. IDE: Jupyter Notebook, VS Code 
 
 Decision Tree 
 1. Test Accuracy: 	82.6% :Highest, but may overfit 
