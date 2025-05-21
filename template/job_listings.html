@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}IT Job Listings{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4 text-gray-800 tracking-tight">Tech Job Opportunities</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+            Discover IT and tech positions that match your skills and expertise
+        </p>
+    </div>
+    
+    {% if error %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+        <span class="block sm:inline">{{ error }}</span>
+    </div>
+    {% endif %}
+
+    {% if skills %}
+    <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-6" role="alert">
+        <span class="material-symbols-outlined align-middle mr-2">code</span>
+        Matching jobs based on your skills: <strong>{{ skills }}</strong>
+    </div>
+    {% endif %}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for job in jobs %}
+        <div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow transform hover:-translate-y-1 duration-300">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center">
+                    <div class="bg-primary-100 p-3 rounded-full mr-4">
+                        <span class="material-symbols-outlined text-primary-600 text-2xl">computer</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">{{ job.title }}</h3>
+                        <p class="text-gray-600">{{ job.company }}</p>
+                    </div>
+                </div>
+                {% if job.skill_matches > 0 %}
+                <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                    <span class="material-symbols-outlined text-sm mr-1">verified</span>
+                    {{ job.skill_matches }} skills match
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="space-y-4">
+                <div class="flex items-center">
+                    <span class="material-symbols-outlined text-gray-500 mr-2">location_on</span>
+                    <span class="text-gray-700">{{ job.location }}</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="material-symbols-outlined text-gray-500 mr-2">payments</span>
+                    <span class="text-gray-700">
+                        {% if job.salary_min and job.salary_max %}
+                            £{{ "{:,.0f}".format(job.salary_min) }} - £{{ "{:,.0f}".format(job.salary_max) }}
+                        {% else %}
+                            Salary not specified
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="flex items-center">
+                    <span class="material-symbols-outlined text-gray-500 mr-2">calendar_today</span>
+                    <span class="text-gray-700">Posted: {{ job.created }}</span>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <p class="text-gray-600 mb-4">{{ job.description[:200] }}...</p>
+                <div class="flex justify-between items-center">
+                    <a href="{{ job.redirect_url }}" target="_blank" 
+                       class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                        <span class="material-symbols-outlined mr-2">open_in_new</span>
+                        View Job Details
+                    </a>
+                    {% if job.skill_matches > 0 %}
+                    <span class="text-sm text-gray-500">
+                        <span class="material-symbols-outlined text-green-500 align-middle">thumb_up</span>
+                        Good match for your profile
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if not jobs and not error %}
+    <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+        <div class="flex flex-col items-center justify-center py-12">
+            <span class="material-symbols-outlined text-gray-400 text-6xl mb-4">search_off</span>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">No Tech Jobs Found</h3>
+            <p class="text-gray-600 mb-6">We couldn't find any IT positions matching your criteria at the moment.</p>
+            <a href="/" class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                Update Skills
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %} 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Career Compass - {% block title %}{% endblock %}</title>
+        <style>
+            @import url(https://fonts.googleapis.com/css2?family=Nunito&display=swap);
+            @import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+            @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+            @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css);
+        </style>
+    </head>
+    <body>
+        <div id="webcrumbs">
+            <div class="w-full min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
+                <header class="bg-white shadow-sm py-4 sticky top-0 z-50 backdrop-blur-sm bg-white/90">
+                    <div class="container mx-auto px-6">
+                        <nav class="flex items-center justify-between transition-all duration-300">
+                            <div class="flex items-center space-x-2">
+                                <img src="/static/logo.png" alt="Logo" class="w-10 h-10">
+                            </div>
+                            <ul class="flex space-x-8 items-center">
+                                <li>
+                                    <a href="/" class="font-medium hover:text-primary-600 transition-colors">Home</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+                <main class="py-8">
+                    <div class="container mx-auto px-6">
+                        {% block content %}{% endblock %}
+                    </div>
+                </main>
+                <footer class="bg-gray-800 text-white py-10">
+                    <div class="container mx-auto px-6">
+                        <div class="text-center text-gray-400 text-sm">
+                            <p>© 2023 Career Compass. All rights reserved.</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                content: ["./src/**/*.{html,js}"],
+                theme: {
+                    name: "Pastel",
+                    fontFamily: {
+                        sans: [
+                            "Nunito",
+                            "ui-sans-serif",
+                            "system-ui",
+                            "sans-serif",
+                            '"Apple Color Emoji"',
+                            '"Segoe UI Emoji"',
+                            '"Segoe UI Symbol"',
+                            '"Noto Color Emoji"'
+                        ]
+                    },
+                    extend: {
+                        fontFamily: {
+                            title: [
+                                "Nunito",
+                                "ui-sans-serif",
+                                "system-ui",
+                                "sans-serif",
+                                '"Apple Color Emoji"',
+                                '"Segoe UI Emoji"',
+                                '"Segoe UI Symbol"',
+                                '"Noto Color Emoji"'
+                            ],
+                            body: [
+                                "Open Sans",
+                                "ui-sans-serif",
+                                "system-ui",
+                                "sans-serif",
+                                '"Apple Color Emoji"',
+                                '"Segoe UI Emoji"',
+                                '"Segoe UI Symbol"',
+                                '"Noto Color Emoji"'
+                            ]
+                        },
+                        colors: {
+                            neutral: {
+                                50: "#f0f9ff",
+                                100: "#e0f2fe",
+                                200: "#bae6fd",
+                                300: "#7dd3fc",
+                                400: "#38bdf8",
+                                500: "#0ea5e9",
+                                600: "#0284c7",
+                                700: "#0369a1",
+                                800: "#075985",
+                                900: "#0c4a6e",
+                                DEFAULT: "#0ea5e9"
+                            },
+                            primary: {
+                                50: "#f0fdfa",
+                                100: "#ccfbf1",
+                                200: "#99f6e4",
+                                300: "#5eead4",
+                                400: "#2dd4bf",
+                                500: "#14b8a6",
+                                600: "#0d9488",
+                                700: "#0f766e",
+                                800: "#115e59",
+                                900: "#134e4a",
+                                DEFAULT: "#14b8a6"
+                            }
+                        }
+                    }
+                },
+                plugins: [],
+                important: "#webcrumbs"
+            }
+        </script>
+    </body>
+</html> 

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Career Compass - Recommendations</title>
+        <style>
+            @import url(https://fonts.googleapis.com/css2?family=Nunito&display=swap);
+            @import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
+            @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+            @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css);
+        </style>
+    </head>
+    <body>
+        <div id="webcrumbs">
+            <div class="w-full min-h-screen bg-gradient-to-b from-gray-50 to-white font-sans">
+                <header class="bg-white shadow-sm py-4 sticky top-0 z-50 backdrop-blur-sm bg-white/90">
+                    <div class="container mx-auto px-6">
+                        <nav class="flex items-center justify-between transition-all duration-300">
+                            <div class="flex items-center space-x-2">
+                                <img src="/static/logo.png" alt="Logo" class="w-10 h-10">
+                            </div>
+                            <ul class="flex space-x-8 items-center">
+                                <li>
+                                    <a href="/" class="font-medium hover:text-primary-600 transition-colors border-b-2 border-primary-500">Home</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </header>
+                <main class="py-8">
+                    <div class="container mx-auto px-6">
+                        <section class="mb-12">
+                            <div class="text-center mb-12">
+                                <h2 class="text-4xl font-bold mb-4 text-gray-800 tracking-tight">Your Career Matches</h2>
+                                <p class="text-gray-600 max-w-2xl mx-auto">
+                                    Based on your skills and academic performance, here are the companies that best match your profile
+                                </p>
+                            </div>
+
+                            {% if recommendations %}
+                                <h3 class="text-2xl font-bold mb-6 text-gray-800">Recommended Companies</h3>
+                                {% for company in recommendations %}
+                                <div class="bg-white rounded-xl shadow-lg p-8 mb-8 hover:shadow-xl transition-shadow transform hover:-translate-y-1 duration-300">
+                                    <div class="flex items-center mb-6">
+                                        <div class="bg-primary-100 p-3 rounded-full mr-4">
+                                            <span class="material-symbols-outlined text-primary-600 text-2xl">business</span>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-2xl font-bold text-gray-800">{{ company['Job Title'] }}</h3>
+                                            <p class="text-gray-600">{{ company['Company'] }}</p>
+                                        </div>
+                                        <div class="ml-auto">
+                                            <span class="bg-primary-100 text-primary-800 px-4 py-2 rounded-full text-sm font-medium">
+                                                {{ "%.1f"|format(company['Match_Score']) }}% Match
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-6">
+                                        <div class="space-y-4">
+                                            <div class="flex items-center">
+                                                <span class="material-symbols-outlined text-gray-500 mr-2">location_on</span>
+                                                <span class="text-gray-700">{{ company['City'] }}</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <span class="material-symbols-outlined text-gray-500 mr-2">payments</span>
+                                                <span class="text-gray-700">₹{{ "%.2f"|format(company['Expected_Salary']) }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                                    <div class="flex flex-col items-center justify-center py-12">
+                                        <span class="material-symbols-outlined text-gray-400 text-6xl mb-4">search_off</span>
+                                        <h3 class="text-2xl font-bold text-gray-800 mb-2">No Recommendations Found</h3>
+                                        <p class="text-gray-600 mb-6">We couldn't find any companies matching your profile at the moment.</p>
+                                        <a href="/" class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
+                                            Try Again
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </section>
+
+                        <div class="text-center mt-5">
+                            <h3 class="text-3xl font-bold text-gray-800 mb-4">Want to explore more opportunities?</h3>
+                            <p class="text-lg text-gray-600 mb-8">Discover real-world tech positions that match your skills and expertise</p>
+                            <div class="inline-block transform hover:scale-105 transition-transform duration-200">
+                                <a href="{{ url_for('job_listings') }}" 
+                                   class="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:from-primary-600 hover:to-primary-700 transition-all duration-300 overflow-hidden">
+                                    <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-400 to-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                                    <span class="relative flex items-center">
+                                        <span class="material-symbols-outlined text-2xl mr-3">work</span>
+                                        <span>Explore Tech Jobs</span>
+                                        <span class="material-symbols-outlined ml-3 group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                                    </span>
+                                </a>
+                                <div class="mt-4 flex justify-center space-x-2 text-sm text-gray-500">
+                                    <span class="flex items-center">
+                                        <span class="material-symbols-outlined text-primary-500 mr-1">verified</span>
+                                        Skill-matched
+                                    </span>
+                                    <span class="flex items-center">
+                                        <span class="material-symbols-outlined text-primary-500 mr-1">update</span>
+                                        Real-time listings
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="bg-gray-800 text-white py-10">
+                    <div class="container mx-auto px-6">
+                        <div class="text-center text-gray-400 text-sm">
+                            <p> Placement Navigator. All rights reserved.</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                content: ["./src/**/*.{html,js}"],
+                theme: {
+                    name: "Pastel",
+                    fontFamily: {
+                        sans: [
+                            "Nunito",
+                            "ui-sans-serif",
+                            "system-ui",
+                            "sans-serif",
+                            '"Apple Color Emoji"',
+                            '"Segoe UI Emoji"',
+                            '"Segoe UI Symbol"',
+                            '"Noto Color Emoji"'
+                        ]
+                    },
+                    extend: {
+                        fontFamily: {
+                            title: [
+                                "Nunito",
+                                "ui-sans-serif",
+                                "system-ui",
+                                "sans-serif",
+                                '"Apple Color Emoji"',
+                                '"Segoe UI Emoji"',
+                                '"Segoe UI Symbol"',
+                                '"Noto Color Emoji"'
+                            ],
+                            body: [
+                                "Open Sans",
+                                "ui-sans-serif",
+                                "system-ui",
+                                "sans-serif",
+                                '"Apple Color Emoji"',
+                                '"Segoe UI Emoji"',
+                                '"Segoe UI Symbol"',
+                                '"Noto Color Emoji"'
+                            ]
+                        },
+                        colors: {
+                            neutral: {
+                                50: "#f0f9ff",
+                                100: "#e0f2fe",
+                                200: "#bae6fd",
+                                300: "#7dd3fc",
+                                400: "#38bdf8",
+                                500: "#0ea5e9",
+                                600: "#0284c7",
+                                700: "#0369a1",
+                                800: "#075985",
+                                900: "#0c4a6e",
+                                DEFAULT: "#0ea5e9"
+                            },
+                            primary: {
+                                50: "#f0fdfa",
+                                100: "#ccfbf1",
+                                200: "#99f6e4",
+                                300: "#5eead4",
+                                400: "#2dd4bf",
+                                500: "#14b8a6",
+                                600: "#0d9488",
+                                700: "#0f766e",
+                                800: "#115e59",
+                                900: "#134e4a",
+                                DEFAULT: "#14b8a6"
+                            }
+                        }
+                    }
+                },
+                plugins: [],
+                important: "#webcrumbs"
+            }
+        </script>
+    </body>
+</html>
