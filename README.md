@@ -11,8 +11,8 @@ Tools and Technology Requirements
  3. Frameworks: Flask for web development
  4. Frontend Technologies: HTML, CSS, JavaScript
  5. IDE: Jupyter Notebook, VS Code 
-
-
+\n
+\n
 Models Build:
 
 Decision Tree 
